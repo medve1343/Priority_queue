@@ -170,7 +170,7 @@ bool priority_queue <T> :: percolateDown(size_t indexHeap)
    else
       indexBigger = indexLeft;
 
-   if(containerAt(indexHeap) < containerAt(indexBigger))
+   if(indexBigger <= size() && containerAt(indexHeap) < containerAt(indexBigger))
    {
       std::swap(containerAt(indexHeap), containerAt(indexBigger));
       percolateDown(indexBigger);
