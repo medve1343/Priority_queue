@@ -25,7 +25,7 @@
 /* Begin PBXFileReference section */
 		C1491D7E2811E633008AF66C /* LabPriorityQueue */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = LabPriorityQueue; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1491D882811E6C3008AF66C /* unitTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = unitTest.h; sourceTree = "<group>"; };
-		C1491D892811E6C3008AF66C /* priority_queue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = priority_queue.h; sourceTree = "<group>"; };
+		C1491D892811E6C3008AF66C /* priority_queue.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 3; lastKnownFileType = sourcecode.c.h; path = priority_queue.h; sourceTree = "<group>"; tabWidth = 3; };
 		C1491D8A2811E6C3008AF66C /* vector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vector.h; sourceTree = "<group>"; };
 		C1491D8B2811E6C3008AF66C /* testSpy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = testSpy.h; sourceTree = "<group>"; };
 		C1491D8C2811E6C3008AF66C /* testVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = testVector.h; sourceTree = "<group>"; };

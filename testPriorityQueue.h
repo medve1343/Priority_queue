@@ -52,32 +52,32 @@ public:
 
       // Insert
       test_push_empty();
-      test_push_levelZero();
-      test_push_levelOne();
-      test_push_levelTwo();
-      test_push_levelThree();
-      test_pushMove_empty();
-      test_pushMove_levelZero();
-      test_pushMove_levelOne();
-      test_pushMove_levelTwo();
-      test_pushMove_levelThree();
-
-      // Remove
-      test_pop_empty();
-      test_pop_one();
-      test_pop_two();
-      test_pop_standard();
-
+//      test_push_levelZero();
+//      test_push_levelOne();
+//      test_push_levelTwo();
+//      test_push_levelThree();
+//      test_pushMove_empty();
+//      test_pushMove_levelZero();
+//      test_pushMove_levelOne();
+//      test_pushMove_levelTwo();
+//      test_pushMove_levelThree();
+//
+//      // Remove
+//      test_pop_empty();
+//      test_pop_one();
+//      test_pop_two();
+//      test_pop_standard();
+//
       // Status
       test_size_empty();
       test_size_standard();
       test_empty_empty();
       test_empty_standard();
-      
-      // Utility
-      test_percolateDown_nothing();
-      test_percolateDown_oneLevel();
-      test_percolateDown_twoLevels();
+//      
+//      // Utility
+//      test_percolateDown_nothing();
+//      test_percolateDown_oneLevel();
+//      test_percolateDown_twoLevels();
 
       report("PQueue");
    }

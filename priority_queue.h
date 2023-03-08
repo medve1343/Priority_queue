@@ -41,23 +41,32 @@ public:
    //
    // construct
    //
-   priority_queue() 
+   priority_queue()
    {
    }
-   priority_queue(const priority_queue &  rhs)  
-   { 
+   priority_queue(const priority_queue &  rhs): container(rhs.container)
+   {
+      
    }
-   priority_queue(priority_queue && rhs)  
+   priority_queue(priority_queue && rhs):container(std::move(rhs.container))
    { 
    }
    template <class Iterator>
    priority_queue(Iterator first, Iterator last) 
    {
+      container.reserve(last - first);
+      auto it = first;
+      while(it != last)
+      {
+         container.push_back(*it);
+         it++;
+      }
    }
-   explicit priority_queue (custom::vector<T> && rhs) 
+   explicit priority_queue (custom::vector<T> && rhs):container(rhs)
    {
+//      this->container = rhs;
    }
-   explicit priority_queue (custom::vector<T>& rhs)
+   explicit priority_queue (custom::vector<T>& rhs):container(rhs)
    {
    }
   ~priority_queue() {}
@@ -83,11 +92,11 @@ public:
    //
    size_t size()  const 
    { 
-      return 99;   
+      return container.size();
    }
    bool empty() const 
    { 
-      return false;  
+      return container.empty();  
    }
    
 private:
@@ -105,7 +114,11 @@ private:
 template <class T>
 const T & priority_queue <T> :: top() const
 {
-   return *(new T);
+   
+   if(container.size() == 0)
+      throw std::out_of_range("std:out_of_range");
+   return container.front();
+   
 }
 
 /**********************************************
@@ -124,10 +137,18 @@ void priority_queue <T> :: pop()
 template <class T>
 void priority_queue <T> :: push(const T & t)
 {
+   container.push_back(t);
+   auto index = container.size() /2;
+   while(index && percolateDown(index))
+      index /= 2;
 }
 template <class T>
 void priority_queue <T> :: push(T && t)
 {
+   container.push_back(std::move(t));
+   auto index = container.size() /2;
+   while(index && percolateDown(index))
+      index /= 2;
 }
 
 /************************************************
@@ -139,6 +160,22 @@ void priority_queue <T> :: push(T && t)
 template <class T>
 bool priority_queue <T> :: percolateDown(size_t indexHeap)
 {
+//   auto indexLeft = indexHeap * 2;
+//   auto indexRight = indexLeft +1;
+//
+//   if (indexRight <= container[indexLeft] < container[indexRight])
+//   {
+//      auto indexBigger = indexRight;
+//   }
+//   else
+//   {
+//      auto indexBigger = indexLeft;
+//   }
+//   else if(container[indexHeap] < container[indexBigger])
+//   {
+//      std::swap(indexHeap, indexBigger);
+//      percolateDown(indexBigger);
+//   }
    return false;
 }
 
@@ -151,6 +188,7 @@ template <class T>
 inline void swap(custom::priority_queue <T>& lhs,
                  custom::priority_queue <T>& rhs)
 {
+   std::swap(lhs.container, rhs.container);
 }
 
 };
