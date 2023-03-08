@@ -46,7 +46,6 @@ public:
    }
    priority_queue(const priority_queue &  rhs): container(rhs.container)
    {
-      
    }
    priority_queue(priority_queue && rhs):container(std::move(rhs.container))
    { 
@@ -103,7 +102,11 @@ private:
 
    bool percolateDown(size_t indexHeap);      // fix heap from index down. This is a heap index!
 
-   custom::vector<T> container; 
+   custom::vector<T> container;
+
+   T & containerAt(size_t indexQueue) {
+      return container[indexQueue - 1];
+   }
 
 };
 
@@ -114,11 +117,9 @@ private:
 template <class T>
 const T & priority_queue <T> :: top() const
 {
-   
-   if(container.size() == 0)
+   if(container.empty())
       throw "std:out_of_range";
    return container.front();
-   
 }
 
 /**********************************************
@@ -138,17 +139,17 @@ template <class T>
 void priority_queue <T> :: push(const T & t)
 {
    container.push_back(t);
-   auto index = container.size() /2;
-   while(index && percolateDown(index))
-      index /= 2;
+   auto parentIndex = container.size() / 2;
+   while(parentIndex && percolateDown(parentIndex))
+      parentIndex /= 2;
 }
 template <class T>
 void priority_queue <T> :: push(T && t)
 {
    container.push_back(std::move(t));
-   auto index = container.size() /2;
-   while(index && percolateDown(index))
-      index /= 2;
+   auto parentIndex = container.size() / 2;
+   while(parentIndex && percolateDown(parentIndex))
+      parentIndex /= 2;
 }
 
 /************************************************
@@ -160,22 +161,21 @@ void priority_queue <T> :: push(T && t)
 template <class T>
 bool priority_queue <T> :: percolateDown(size_t indexHeap)
 {
-//   auto indexLeft = indexHeap * 2;
-//   auto indexRight = indexLeft +1;
-//
-//   if (indexRight <= container[indexLeft] < container[indexRight])
-//   {
-//      auto indexBigger = indexRight;
-//   }
-//   else
-//   {
-//      auto indexBigger = indexLeft;
-//   }
-//   else if(container[indexHeap] < container[indexBigger])
-//   {
-//      std::swap(indexHeap, indexBigger);
-//      percolateDown(indexBigger);
-//   }
+   auto indexLeft = indexHeap * 2;
+   auto indexRight = indexLeft + 1;
+   size_t indexBigger;
+
+   if (indexRight <= size() && containerAt(indexLeft) < containerAt(indexRight))
+      indexBigger = indexRight;
+   else
+      indexBigger = indexLeft;
+
+   if(containerAt(indexHeap) < containerAt(indexBigger))
+   {
+      std::swap(containerAt(indexHeap), containerAt(indexBigger));
+      percolateDown(indexBigger);
+      return true;
+   }
    return false;
 }
 
