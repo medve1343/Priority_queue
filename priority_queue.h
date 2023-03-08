@@ -123,11 +123,10 @@ void priority_queue <T> :: pop()
 {
    if(size() > 0)
    {
-      std::swap(container[1], container[size()]);
+      std::swap(containerAt(1), containerAt(size()));
       container.pop_back();
       percolateDown(1);
    }
-   
 }
 
 /*****************************************

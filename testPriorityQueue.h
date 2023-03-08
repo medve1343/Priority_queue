@@ -66,7 +66,7 @@ public:
       test_pop_empty();
       test_pop_one();
       test_pop_two();
-//      test_pop_standard();
+      test_pop_standard();
        
       // Status
       test_size_empty();
@@ -74,8 +74,8 @@ public:
       test_empty_empty();
       test_empty_standard();
 
-//      
-//      // Utility
+
+      // Utility
       test_percolateDown_nothing();
       test_percolateDown_oneLevel();
       test_percolateDown_twoLevels();
