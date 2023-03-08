@@ -61,13 +61,8 @@ public:
          it++;
       }
    }
-   explicit priority_queue (custom::vector<T> && rhs):container(rhs)
-   {
-//      this->container = rhs;
-   }
-   explicit priority_queue (custom::vector<T>& rhs):container(rhs)
-   {
-   }
+   explicit priority_queue (custom::vector<T> && rhs):container(rhs) { }
+   explicit priority_queue (custom::vector<T>& rhs):container(rhs) { }
   ~priority_queue() {}
 
    //
@@ -93,10 +88,7 @@ public:
    { 
       return container.size();
    }
-   bool empty() const 
-   { 
-      return container.empty();
-   }
+   bool empty() const  { return container.empty(); }
    
 private:
 
@@ -129,6 +121,13 @@ const T & priority_queue <T> :: top() const
 template <class T>
 void priority_queue <T> :: pop()
 {
+   if(size() > 0)
+   {
+      std::swap(container[1], container[size()]);
+      container.pop_back();
+      percolateDown(1);
+   }
+   
 }
 
 /*****************************************
@@ -143,6 +142,7 @@ void priority_queue <T> :: push(const T & t)
    while(parentIndex && percolateDown(parentIndex))
       parentIndex /= 2;
 }
+
 template <class T>
 void priority_queue <T> :: push(T && t)
 {
@@ -170,11 +170,12 @@ bool priority_queue <T> :: percolateDown(size_t indexHeap)
    else
       indexBigger = indexLeft;
 
-   if(containerAt(indexHeap) < containerAt(indexBigger))
+   if(indexBigger <= size() && containerAt(indexHeap) < containerAt(indexBigger))
    {
       std::swap(containerAt(indexHeap), containerAt(indexBigger));
       percolateDown(indexBigger);
       return true;
+
    }
    return false;
 }
@@ -186,10 +187,7 @@ bool priority_queue <T> :: percolateDown(size_t indexHeap)
  ************************************************/
 template <class T>
 inline void swap(custom::priority_queue <T>& lhs,
-                 custom::priority_queue <T>& rhs)
-{
-   std::swap(lhs.container, rhs.container);
-}
+                 custom::priority_queue <T>& rhs) { std::swap(lhs.container, rhs.container); }
 
 };
 
