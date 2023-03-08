@@ -96,7 +96,7 @@ public:
    }
    bool empty() const 
    { 
-      return container.empty();  
+      return container.empty();
    }
    
 private:
@@ -116,7 +116,7 @@ const T & priority_queue <T> :: top() const
 {
    
    if(container.size() == 0)
-      throw std::out_of_range("std:out_of_range");
+      throw "std:out_of_range";
    return container.front();
    
 }
