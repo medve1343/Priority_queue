@@ -13,7 +13,7 @@
  *    This will contain the class definition of:
  *        priority_queue          : A class that represents a Priority Queue
  * Author
- *    <your names here>
+ *    Joel Jossie, Gergo Medveczky
  ************************************************************************/
 
 #pragma once
@@ -41,15 +41,9 @@ public:
    //
    // construct
    //
-   priority_queue()
-   {
-   }
-   priority_queue(const priority_queue &  rhs): container(rhs.container)
-   {
-   }
-   priority_queue(priority_queue && rhs):container(std::move(rhs.container))
-   { 
-   }
+   priority_queue() = default;
+   priority_queue(const priority_queue &  rhs) : container(rhs.container)            {}
+   priority_queue(priority_queue && rhs)       : container(std::move(rhs.container)) {}
    template <class Iterator>
    priority_queue(Iterator first, Iterator last) 
    {
@@ -61,9 +55,9 @@ public:
          it++;
       }
    }
-   explicit priority_queue (custom::vector<T> && rhs):container(rhs) { }
-   explicit priority_queue (custom::vector<T>& rhs):container(rhs) { }
-  ~priority_queue() {}
+   explicit priority_queue (custom::vector<T> && rhs) : container(rhs) {}
+   explicit priority_queue (custom::vector<T> &  rhs) : container(rhs) {}
+  ~priority_queue()                                                    {}
 
    //
    // Access
@@ -84,11 +78,8 @@ public:
    //
    // Status
    //
-   size_t size()  const 
-   { 
-      return container.size();
-   }
-   bool empty() const  { return container.empty(); }
+   size_t size() const { return container.size();  }
+   bool empty()  const { return container.empty(); }
    
 private:
 
@@ -174,7 +165,6 @@ bool priority_queue <T> :: percolateDown(size_t indexHeap)
       std::swap(containerAt(indexHeap), containerAt(indexBigger));
       percolateDown(indexBigger);
       return true;
-
    }
    return false;
 }
